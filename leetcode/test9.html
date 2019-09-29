@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 当使用 严格模式后 function 里面的 this 为 undefind
+    //'use strict';
+    // function a() {
+    //   console.log(this)
+    // }
+    // a()
+    // var a = {}
+    // Object.defineProperty(a, 'a', {
+    //   get() {
+    //     console.log(1)
+    //   },
+    //   set() {
+    //     console.log(2)
+    //   }
+    // })
+    // let v = Object.getOwnPropertyDescriptor(a, 'a')
+    // console.log(v.get)//返回get 函数
+
+    /**
+     * 使用二分查找 一个数组里面的为
+     * */
+    // 有序数组  left > right
+    function find(val, arr) {
+      let mid, left = 0, right = arr.length - 1;
+      // 为什么是小于等于 
+      // 最后一个 相同  why (回去慢慢想)
+      while (left <= right) {
+        mid = (left + right) / 2 >> 0;
+        if (arr[mid] === val) {
+          return mid
+        } else if (arr[mid] > val) {
+          right = mid - 1;
+        } else {
+          left = mid + 1;
+        }
+      }
+      // left = right
+      // 当进入到这里的时候肯定是没有找到
+      return left
+    }
+    // 若没有寻找插入位子
+    console.log(find(12, [1, 2, 3, 4, 5, 6, 7, 8, 9, 11]))
+  </script>
+</body>
+
+</html>

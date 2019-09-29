@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+</head>
+
+<body>
+  <script>
+    var reverse = function (x) {
+      x = String(x);
+      if (x[0] === '-') {
+        x = split(x.slice(1), '-')
+      } else {
+        x = split(x)
+      }
+      if (Math.abs(x) > (2 ** 31 - 1)) {
+        return 0
+      } else {
+        return x
+      }
+      function split(s, f = '') {
+        return Number(f + s.split('').reverse().join(''));
+      }
+    };
+    var myAtoi = function (str) {
+      let n = parseInt(str) || 0;
+      if (Math.abs(n) > (2 ** 31 - 1)) {
+        return n > 0 ? 2 ** 31 - 1 : -(2 ** 31)
+      } else {
+        return n
+      }
+    };
+    var isPalindrome = function (x) {
+      if (x < 0) {
+        return false
+      }
+      let arr = String(x).split('');
+      return arr.join('') === arr.reverse().join('');
+    };
+    console.log(isPalindrome(10))
+  </script>
+</body>
+
+</html>

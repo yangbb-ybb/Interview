@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>defineProperty测试</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+
+  </style>
+</head>
+
+<body>
+</body>
+<script>
+  let a = {}
+  // 所以 这个方法 需要封装 一下  把他改造成所有 定义都使用的 方法
+  // 这里旧相当于 创建了一个闭包 他会将值保存再局部 变量 val 中
+  function def(obj, key, val) {
+    Object.defineProperty(obj, key, {
+      // 原来 所有的方法都是我学过的
+      // value: 123,
+      // writable: true,
+      enumerable: true,
+      configurable: true,
+      get: function () {
+        return val;
+      },
+      set: function (value) {
+        val = value;
+      }
+    })
+  }
+  def(a, 'a', 1);
+  // 使用闭包 可能有坏处
+  console.log(a.a);
+  // 任务 ：先进阿
+  //       进去后 写博客 写开源
+</script>
+
+</html>

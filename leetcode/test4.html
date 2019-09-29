@@ -1,0 +1,88 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+  <script>
+    // 别人的 解答
+    // var findKthNumber = function (n, k) {
+    //   let getCount = (prefix, n) => {
+    //     let count = 0;
+    //     for (let cur = prefix, next = prefix + 1; cur <= n; cur *= 10, next *= 10)
+    //       count += Math.min(next, n + 1) - cur;
+    //     return count;
+    //   }
+    //   let p = 1;
+    //   let prefix = 1;
+    //   while (p < k) {
+    //     let count = getCount(prefix, n);
+    //     if (p + count > k) {
+    //       prefix *= 10;
+    //       p++;
+    //     } else if (p + count <= k) {
+    //       prefix++;
+    //       p += count;
+    //     }
+    //   }
+    //   return prefix;
+    // };
+
+    // 我TM的
+    // 1 10 11 12 13 14.。。。21 22
+    // 涉及到 多次 进行了 隐式转换
+    var findKthNumber = function (n, k) {
+      let prefix = 1;
+      let t = 0;//当前最小
+      // 当 n 超过 k 的时候，就是这个算法 
+      while (t < k) {
+        if (prefix * 10 <= n) {
+          // 下一个数应该是
+          prefix *= 10;
+          t++;
+        } else {
+          //这里有致命的逻辑错误 一般来说是 没问题的
+          if (!/^9*$/.test((prefix + '').slice(1)) && prefix < n) {
+            prefix += 1;
+          } else {
+            prefix = Number((prefix + '')[0]) + 1;
+          }
+          t++
+        }
+        console.log(prefix)
+      }
+      return prefix;
+    };
+
+    console.time();
+    let num = findKthNumber(100000000, 10);
+    console.timeEnd();
+    console.log(num)
+    // function getNum(n, k) {
+    //   let length = n.length;//数据长度
+    //   // 从1 开始
+    // }
+
+    // 最初解  千万级 数据还是可以计算的
+    // 这种解法 根本旧没有做什么 操作垃圾 
+    // 这样做的时候内存 就超了 并不是错误
+    // function getNum(n, k) {
+    //   let arr = []
+    //   for (let i = 1; i < n; i++) {
+    //     arr.push(i)
+    //   }
+    //   return arr.sort()[k]
+    // }
+    // console.time();
+    // let num = getNum(100000000, 20);
+    // console.timeEnd();
+    // console.log(num);
+  </script>
+</body>
+
+</html>

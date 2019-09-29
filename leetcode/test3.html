@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+  <script src="main.js"></script>
+</head>
+<body>
+  <script>
+    // 想想看 明年这么走 
+    // 需要 今年 看大量的周边 技术
+    this.promisify(wx.downloadFile)({
+      url: data.src
+    })
+    // 这不是 沙雕的 设计吗
+    // 返还 一个 中间 函数
+    promisify: original => {
+      return function (opt) {
+        return new Promise((resolve, reject) => {
+          // 合并 两个 对象
+          opt = Object.assign({
+            success: resolve,
+            fail: reject
+          }, opt)
+          // 那么到 这里就有 一个全新的 满足了条件的小程序的object
+          // original 就一定是 小程序的api 小程序的api 才能满足回调 这个概念
+          original(opt)
+        })
+      }
+    }
+    // 修正 数字显示
+    fixPrefixion: number => {
+      if (number < 10) {
+        return `0${number}`
+      }
+      return number
+    }
+    // 是否是 瑞年
+    // 能被4整除 不能被100 整除 能被400 整除
+    // "".split(",") // => 所以切割 都是存在的 
+    // 当切割 一个不存在的 东西的时候 会返回 [""] 这个奇怪的数组
+    // 不使用 webpack 的代码 根本不行啊 不能提取公共部分的代码  完全靠自己提取 根本不行
+    
+  </script> 
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+  <script>
+    // 查找 最大回文
+    // 我自己YY的垃圾算法
+    var str = "babad"
+    var longestPalindrome = function (s) {
+      let res = '';//当前回文
+      let len = s.length;
+      // 遍历 寻找当前位置的最大回文
+      for (let i = 0; i < len; i += .5) {
+        let j = 1;
+        let p = -1;
+        let now = s[i] || '';// 当前字符
+        while (true) { // 当是回文的 时候继续 操作
+          let next = Math.floor(i + j);
+          let pre = Math.ceil(i + p);
+          let pw = s[pre];
+          let nw = s[next];
+          if (pw && nw && pw === nw) {
+            j++;
+            p--;
+            now = pw + now + nw;
+          } else {
+            now.length >= res.length && (res = now);
+            break;
+          }
+        }
+      }
+      return res
+    };
+    //console.log(longestPalindrome(str))
+    // 暴力破解
+    var longestPalindrome_rubbish = function (s) {
+      var isLoopStr = function (str) {
+        if (str.length === 1)
+          return true;
+        let arr = str.split('');
+        return arr.join('') === arr.reverse().join('')
+      }
+      // 一次循环 取出字串
+      let length = s.length;
+      let res = "";
+      for (let i = 0; i < length; i++) {
+        for (let j = i + 1; j <= length; j++) {
+          // 得到子串
+          let tr = s.slice(i, j);
+          isLoopStr(tr) && tr.length > res.length && (res = tr);
+        }
+      }
+      return res
+    };
+    // 寻找最短会回文  没啥意思了
+    var str =abcd;
+    var shortestPalindrome = function (s) {
+      // for(let i =0;){
+
+      // }
+    };
+  </script>
+  
+</body>
+
+</html>

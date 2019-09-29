@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+  <!-- <script>
+    // 上一个自己
+    let str = "basbxsdb";
+    // a b c  abc  
+    var lengthOfLongestSubstring = function (s) {
+      let hashMap = new Map();
+      let ans = 0; // 长度
+      let n = s.length;
+      let len = 0; // 上一个计算点的位子
+      //  这个思路就是不对的  直接pass 掉
+      for (let i = 0; i < n; i++) {
+        let now = s[i];
+        let flag = hashMap.get(now);
+        // 当前是重复点
+        if (flag !== undefined) {
+          // 就是这句话 看不懂  我操
+          // 我去 还真是 符合逻辑的
+          len = Math.max(flag, len)
+        }
+        hashMap.set(now, i);
+        // 没循环 一次 都会重新 计算 当前的长度 
+        ans = Math.max(ans, i - len);
+      }
+      return ans
+    };
+    console.log(lengthOfLongestSubstring(str))
+  </script> -->
+  <script>
+    var lengthOfLongestSubstring = function (s) {
+        let hashMap = new Map();
+        let ans = 0; // 长度
+        let pos = 0; // 出现的位子
+        let n = s.length;
+        let len = 0;
+        //  这个思路就是不对的  直接pass 掉
+        for (let i = 0; i <= n - 1; i++) {
+          let now = s[i];
+          let flag = hashMap.get(now);
+          // 当前是重复点
+          if (flag !== undefined) {
+            // 说明相同了
+            // flag 前一个自己的位置
+            // 既然无法比较 那就都取值
+            let selfDis = i - flag;
+            let norDis = i - pos + 1;
+            len = Math.min(selfDis, norDis);
+            //console.error(len)
+            pos = i;
+          } else {
+            len++;
+          }
+          //console.warn(len, now)
+          hashMap.set(now, i);
+          ans = len > ans ? len : ans;
+        }
+        return pos ? ans : n;
+      };
+  </script>
+</body>
+
+</html>

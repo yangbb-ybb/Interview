@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+  <script>
+    `
+    L   C   I   R
+    E T O E S I I G
+    E   D   H   N
+    `
+    // 转换 z序列
+    let s = "LEETCODEISHIRING";
+    // 只需要扔进数组 就行
+    var convert = function (s, numRows) {
+      if (numRows === 1)
+        return s
+      let arr = [];
+      for (let i = 0; i < numRows; i++) {
+        arr.push([])
+      }
+      // 确定 每一个字母的位置
+      let bigCompare = 2 * numRows - 2;
+      let ia = 0;//当前数组
+      let isP = 1;
+      for (let i = 0; i < s.length; i++) {
+        arr[ia].push(s[i]);
+        // 设置下一次
+
+        if (ia < numRows - 1 && ia >= 0) {// 正常的加减
+          ia += isP;
+          // 这里需要考虑一下
+          if (ia < 0) {
+            isP = -isP;
+            ia += 2;
+          }
+        } else {
+          isP = -isP;
+          ia += isP;
+        }
+      }
+      let sb = "";
+      for (let i = 0; i < numRows; i++) {
+        sb += arr[i].join('');
+      }
+      return sb
+    };
+    convert("AB", 1)
+  </script>
+</body>
+
+</html>

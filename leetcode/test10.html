@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 水体积  这个困难 页太简单了吧
+    // var maxArea = function (height) {
+    //   //暴力计算
+    //   let l= height.length;
+    //   // 一根是无法计算出 水位的
+    //   let max = 0;
+    //   for(let i=0;i<l-1;i++){
+    //     for(let j=i+1;j<l;j++){
+    //       let a=(j-i)*Math.min(height[i],height[j]);
+    //       if(a>max)
+    //         max = a
+    //     }
+    //   }
+    //   return max;
+    // };
+    var maxArea = function (height) {
+      // 这个
+      let i = 0;
+      let j = height.length - 1;
+      let max = 0;
+
+      let min = -1;
+      let fl;
+      // 当i和j 相同的 时候 停止
+      while (i !== j) {
+        let m;
+        if (height[i] > height[j]) {
+          min = height[j];
+          fl = false;
+        } else {
+          min = height[i];
+          fl = true;
+        }
+        m = (j - i) * min;
+        if (m > max) {
+          max = m;
+        }
+        // 短边++
+        !fl ? j-- : i++;
+      }
+      return max;
+    };
+    maxArea([1, 8, 6, 2, 5, 4, 8, 3, 7])
+  </script>
+</body>
+
+</html>

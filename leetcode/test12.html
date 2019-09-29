@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 将存储空间去掉  应该额能将不小内存 而且 速度更快
+    //给定一个按照升序排列的整数数组 nums，和一个目标值 target。找出给定目标值在数组中的开始位置和结束位置。
+    var searchRange = function (nums, target) {
+      let left = 0, right = nums.length - 1;
+      let mid = (left + right) / 2 >> 0;
+      let start, end;
+      function dichotomy(mid) {
+        if (left > right) {// 当做
+          return [-1, -1];
+        }
+        if (nums[mid] === target) {
+          start = findNear(mid, target, -1);
+          end = findNear(mid, target, 1);
+          return [start, end];
+        } else {// 小于 当相差为 1的时候 怎么办
+          // 这里有个问题 当4 5 的时候 我们怎么办 不可能 进行 4+5
+          nums[mid] > target ? (right = mid - 1) : (left = mid + 1)
+          mid = (left + right) / 2 >> 0;
+          return dichotomy(mid);
+        }
+      }
+      //周边
+      function findNear(i, target, dis) {
+        if (nums[i] === target) {
+          i = findNear(i + dis, target, dis)
+          return i
+        } else {
+          return i - dis
+        }
+
+      }
+      return dichotomy(mid);
+    };
+
+    let nums = [5, 7, 7, 8, 8, 10], target = 6
+    //console.log(searchRange(nums, target))
+    //输出: [3, 4]
+    // 简单暴力的 做法
+    var searchRange = function (nums, target) {
+      var first = nums.indexOf(target);
+      var last = nums.lastIndexOf(target);
+      return [first, last]
+    }
+    // 内存消耗会 变多但是 速度会更快
+    // 我TM的日了狗的 为什么 还是一次遍历的 快
+  </script>
+</body>
+
+</html>

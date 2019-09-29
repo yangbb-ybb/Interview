@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>测试代码</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+
+  </style>
+</head>
+
+<body>
+</body>
+<script>
+  // 
+  // 测试 this 指向问题
+  class v {
+    constructor(name) {
+      this.name = name;
+    }
+    say = function () {
+      // 这里的 this 为什么是undefind 而不是 window 对象
+      console.log(this);
+      return `${this.name}`
+    }
+  }
+  let y = new v('ybb');
+  // 当使用中间件 函数的 时候
+  function execute(fun) {
+    // 我们这里使用的 时候  window.
+    //console.log(fun)
+    // 传递进来的 fun 是一个函数
+    // 这里的 fun 是一个函数
+
+    // 文档中说  这里的 window说 这里的 this 也是window 对象， 但是这里使用了 'use strict',多以是 undefind  
+    fun()
+  }
+  //y.say()
+  // execute(y.say)
+  // 'use strict'
+  // console.log(this);
+  function S() {
+    'use strict'
+    console.log(this)
+    //window 是有对象
+    console.log(window);
+  }
+  //S()
+</script>
+
+</html>
